@@ -24,7 +24,23 @@ func TestSelect(t *testing.T) {
 
 		Select(sort.IntSlice(a), pos)
 
-		return a[pos] == b[pos]
+		if a[pos] != b[pos] {
+			return false
+		}
+
+		for i := 0; i < pos; i++ {
+			if a[i] > a[pos] {
+				return false
+			}
+		}
+
+		for i := pos; i < len(a); i++ {
+			if a[i] < a[pos] {
+				return false
+			}
+		}
+
+		return true
 	}
 
 	if err := quick.Check(f, nil); err != nil {
