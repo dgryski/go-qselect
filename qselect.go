@@ -20,6 +20,10 @@ type Interface interface {
 
 func Select(data Interface, k int) {
 
+	if data.Len() == 0 {
+		return
+	}
+
 	left, right := 0, data.Len()-1
 
 	for {
